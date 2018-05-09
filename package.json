@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "bootstrap": "^4.1.1",
+    "firebase": "^5.0.1",
     "jquery": "^3.3.1",
     "nuxt": "^1.0.0",
+    "nuxt-firebase": "0.0.3",
     "popper.js": "^1.14.3"
   },
   "devDependencies": {

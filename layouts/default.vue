@@ -1,7 +1,6 @@
 <template>
   <div>
-    <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
-      <nav class="navbar navbar-expand-lg fixed-top bg-light">
+    <!--  <nav class="navbar navbar-expand-lg fixed-top bg-light">
         <div class="navbar-header">
           <a class="navbar-brand" href="/">
             <img class="logo-default" src="~/assets/logo-comp.png" width="250" alt="logo">
@@ -22,7 +21,32 @@
               <li itemprop="name"><a itemprop="url" href="/contactos">Contactos</a></li>
           </ul>
         </div>
-      </nav>
+      </nav> -->
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+          <div class="">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="sr-only">Toggle navigation</span>
+                      <i class="fa fa-bars"></i>
+                  </button>
+                   <a class="navbar-brand" href="/">
+                     <img class="logo-default" src="~/assets/logo-comp.png" width="250" alt="logo">
+                   </a>
+              </div>
+              <div class="collapse navbar-collapse">
+                  <ul class="nav navbar-nav navbar-right" itemtype="http://www.schema.org/SiteNavigationElement">
+                      <nuxt-link class="nav-item" to="/">Início</nuxt-link>
+                      <li itemprop="name"><a itemprop="url" href="#" data-toggle="modal" data-target="#myModalHorizontal">Marcações Online</a></li>
+                      <nuxt-link to="/specialities">Especialidades</nuxt-link>
+                      <li itemprop="name"><a itemprop="url" href="/exames">Exames</a></li>
+                      <li itemprop="name"><a itemprop="url" href="/analises-clinicas">Análises Clínicas</a></li>
+                      <li itemprop="name"><a itemprop="url" href="/estetica">Estética</a></li>
+                      <li itemprop="name"><a itemprop="url" href="/contactos">Contactos</a></li>
+                  </ul>
+              </div>
+          </div>
+      </header><!--/header-->
+
       <!--  <div class="">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
@@ -46,7 +70,6 @@
                 </ul>
             </div>
         </div>/header-->
-     </header>
     <nuxt/>
   </div>
 </template>

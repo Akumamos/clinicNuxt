@@ -22,8 +22,21 @@ module.exports = {
   /*
   ** Build configuration
   */
+/*  modules: [
+   {
+  // src: '@rafamaciel/firebase',
+     options: {
+       apiKey: "AIzaSyBuJ_QvagsAni6C4pVWM5uAqtsac7knoGk",
+       authDomain: "clinalamo-3d38c.firebaseapp.com",
+       databaseURL: "https://clinalamo-3d38c.firebaseio.com",
+       projectId: "clinalamo-3d38c",
+       storageBucket: "clinalamo-3d38c.appspot.com",
+       messagingSenderId: "750845688635"
+     }
+   }
+ ],*/
   build: {
-    vendor: ['jquery', 'bootstrap'],
+    vendor: ['jquery','bootstrap', 'firebase'],
     plugins: [
          // set shortcuts as global for bootstrap
          new webpack.ProvidePlugin({
@@ -47,10 +60,14 @@ module.exports = {
     }
   },
   css: [
-       'bootstrap/dist/css/bootstrap.css',
+       '~/assets/animate.css',
+       '~/assets/form-elements.css',
+       '~/assets/multi-step.css',
+       '~/assets/bootstrap.css',
        '~/assets/main.css'
   ],
   plugins:[
+    '~/plugins/firebase.js',
     { src: '~/plugins/plugins.js', ssr: false },
     { src: '~/plugins/jquery.isotope.min.js', ssr: false },
     { src: '~/plugins/init.js', ssr: false }
