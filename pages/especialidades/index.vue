@@ -30,20 +30,21 @@
         <div class="gap"></div>
 
           <div class="container">
-            <ul id="specialities-row">
-              <li itemprop="name" style="list-style: none;">
-                  <a itemprop="url" id="zHfB26or9pbWKnui7bPi" class="specialities-item col-md-3" style="margin-bottom:25px; cursor:pointer; height: 120px" href="/especialidades/acupunctura">
-                      <div class="center team-member" style="height: 100%">
-                          <div class="team-content " style="position:relative; box-shadow: 1px 3px 5px 0px #808080ad; height: 100%;"><i class="fa fa-info-circle" aria-hidden="true" style="position: absolute; top: 10px; right: 10px; font-size: 20px; color: #32c5d5;"></i>
-                              <h5 style="overflow: hidden;">Acupunctura</h5>
-                              <p></p>
-                              <h5><small class="role muted">Centro de Acupunctura Além Tejo</small></h5>
-                              <p></p>
-                          </div>
+            <ul>
+              <li class="specialities-item col-md-3" style="margin-bottom:25px; cursor:pointer; height: 120px" v-for="elem in specialitiesRows" :key="elem.id">
+                <nuxt-link to="/about">
+                  <div class="center team-member" style="height: 100%">
+                      <div class="team-content " style="position:relative; box-shadow: 1px 3px 5px 0px #808080ad; height: 100%;"><i class="fa fa-info-circle" aria-hidden="true" style="position: absolute; top: 10px; right: 10px; font-size: 20px; color: #32c5d5;"></i>
+                          <h5 style="overflow: hidden;">{{elem.name}}</h5>
+                          <p></p>
+                          <h5 v-for="item in elem.doctors" :key="item.id">
+                            <small class="role muted">{{item.name}}</small>
+                          </h5>
+                          <p></p>
                       </div>
-                  </a>
+                  </div>
+                </nuxt-link>
               </li>
-
             </ul>
             <div class="gap"></div>
             <div class="gap"></div>
@@ -58,25 +59,40 @@
 <script>
 import { db } from '~/plugins/firebase.js'
 
+function transformLink(test){
+  console.log('transform', test );
+}
+
 export default {
-  asyncData(context) {
-    // We can return a Promise instead of calling the callback
-    return db.collection("specialities").get().then((querySnapshot) => {
-         querySnapshot.docs.map(doc => {
-          let name = doc.data().name;
-          console.log()
-          return { specialitiesRows: name }
-         })
-      })
-  },
+  data () {
+     return {
+       specialitiesRows: [],
+       title: 'Especialidades'
+      }
+   },
+   asyncData (context) {
+     let items = [];
+     db.collection("specialities").get().then((querySnapshot) => {
+        querySnapshot.docs.map(doc => {
+         let specialities = doc.data(),
+             id = doc.id;
+            transformLink(id);
+         //id set
+         specialities.id = id;
+         items.push(specialities);
+        })
+     })
+
+     return { specialitiesRows: items }
+   },
   fetch () {
-    db.collection("specialities").get().then((querySnapshot) => {
+    /*return db.collection("specialities").get().then((querySnapshot) => {
        querySnapshot.docs.map(doc => {
         let name = doc.data().name;
-
+        return { specialitiesRowsObj : doc.data() }
         //console.log('fecth', doc.data(), this.specialitiesRows, this.title);
        })
-    })
+    })*/
     // The `fetch` method is used to fill the store before rendering the page
   },
   head () {

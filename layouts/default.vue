@@ -37,7 +37,7 @@
                   <ul class="nav navbar-nav navbar-right" itemtype="http://www.schema.org/SiteNavigationElement">
                       <nuxt-link class="nav-item" to="/">Início</nuxt-link>
                       <li itemprop="name"><a itemprop="url" href="#" data-toggle="modal" data-target="#myModalHorizontal">Marcações Online</a></li>
-                      <nuxt-link to="/specialities">Especialidades</nuxt-link>
+                      <nuxt-link to="/especialidades">Especialidades</nuxt-link>
                       <li itemprop="name"><a itemprop="url" href="/exames">Exames</a></li>
                       <li itemprop="name"><a itemprop="url" href="/analises-clinicas">Análises Clínicas</a></li>
                       <li itemprop="name"><a itemprop="url" href="/estetica">Estética</a></li>
