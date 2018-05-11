@@ -15,6 +15,9 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  //modules: [
+  //   '@nuxtjs/sitemap'
+  //],
   /*
   ** Customize the progress bar color
   */

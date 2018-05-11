@@ -64,7 +64,6 @@ export default {
     return db.collection("specialities").get().then((querySnapshot) => {
          querySnapshot.docs.map(doc => {
           let name = doc.data().name;
-          console.log()
           return { specialitiesRows: name }
          })
       })
