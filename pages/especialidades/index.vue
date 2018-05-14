@@ -8,7 +8,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="center gap fade-down section-heading">
-                                    <h2 class="main-title text-white">{{title}}</h2>
+                                    <h2 class="main-title text-white">{{title}} - {{name}}</h2>
                                     <hr>
                                 </div>
                             </div>
@@ -67,6 +67,7 @@ export default {
   data () {
      return {
        specialitiesRows: [],
+       name: process.static ? 'static' : (process.server ? 'server' : 'client'),
        title: 'Especialidades'
       }
    },
