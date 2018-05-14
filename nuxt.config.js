@@ -1,4 +1,8 @@
-const webpack = require('webpack')
+const webpack = require('webpack');
+const firebase = require('firebase/app');
+require('firebase/firestore');
+//import { db } from '~/plugins/firebase.js'
+
 
 module.exports = {
   /*
@@ -15,6 +19,35 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  generate: {
+    routes: function () {
+      const specialitiesRows = [];
+      const settings = { timestampsInSnapshots: true};
+
+      firebase.initializeApp({
+        apiKey: "AIzaSyBuJ_QvagsAni6C4pVWM5uAqtsac7knoGk",
+        authDomain: "clinalamo-3d38c.firebaseapp.com",
+        databaseURL: "https://clinalamo-3d38c.firebaseio.com",
+        projectId: "clinalamo-3d38c",
+        storageBucket: "clinalamo-3d38c.appspot.com",
+        messagingSenderId: "750845688635"
+      });
+      firebase.firestore().settings(settings);
+
+      /*routes especialidades*/
+      let specialities = firebase.firestore().collection("specialities").get().then((querySnapshot) => {
+          querySnapshot.docs.map(doc => {
+           const url =  doc.data().name.split('/').length > 1 ? doc.data().name.replace(/ /g,"").split('/').join("-ou-") : doc.data().name.split(" ").join("-");
+           specialitiesRows.push('/especialidades/' + url.toLowerCase());
+          })
+          return specialitiesRows
+       })
+
+       return Promise.all([specialities]).then(values => {
+          return values.join().split(',');
+        })
+    }
+  },
   //modules: [
   //   '@nuxtjs/sitemap'
   //],
@@ -25,19 +58,6 @@ module.exports = {
   /*
   ** Build configuration
   */
-/*  modules: [
-   {
-  // src: '@rafamaciel/firebase',
-     options: {
-       apiKey: "AIzaSyBuJ_QvagsAni6C4pVWM5uAqtsac7knoGk",
-       authDomain: "clinalamo-3d38c.firebaseapp.com",
-       databaseURL: "https://clinalamo-3d38c.firebaseio.com",
-       projectId: "clinalamo-3d38c",
-       storageBucket: "clinalamo-3d38c.appspot.com",
-       messagingSenderId: "750845688635"
-     }
-   }
- ],*/
   build: {
     vendor: ['jquery','bootstrap', 'firebase'],
     plugins: [
