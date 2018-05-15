@@ -56,7 +56,7 @@ export default {
     //do something after mounting vue instance
     if( process.static){
       let name = this.$route.params.split('-ou-').length > 1 ? this.$route.params.split('-ou-').join(' / ') : this.$route.params.split("-").join(" ");
-      let specialities = {};  
+      let specialities = {};
 
       await db.collection("specialities").where("name", "==", capitalizeEachWord(name)).get().then((querySnapshot) => {
           querySnapshot.docs.map(doc => {
