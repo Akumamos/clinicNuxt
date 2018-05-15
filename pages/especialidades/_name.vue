@@ -1,7 +1,63 @@
 <template>
-  <div class="user">
-    <h3 > teste  - >{{ specialities_details.name }} - {{name}}</h3>
-    <p><nuxt-link to="/especialidades">Voltar à lista</nuxt-link></p>
+  <div>
+    <section id="single-page-slider" class="no-margin">
+        <div class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="center gap fade-down section-heading">
+                                    <h2 class="main-title text-white">{{specialities_details.name}}</h2>
+                                    <hr>
+                                    <p class="schedule-spec">{{specialities_details.schedule}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/.item-->
+            </div><!--/.carousel-inner-->
+        </div><!--/.carousel-->
+    </section><!--/#main-slider-->
+    
+    <div id="content-wrapper">
+      <section id="item-content" class="white">
+        <div class="container">
+            <div class="gap"></div>
+
+            <div class="row">
+              <div class="tabs col-md-12 fade-up" id="doctors-tag">
+                <div class="tab-2 col-md-6">
+                <label class="center tabs-controller tab-info active upperCase" for="tab2-1">
+                  Informação
+                </label>
+                <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+                <div class="info-description col-md-12">
+                  <div class="col-md-6 specialities-img">Sem Descrição</div>
+                  <div class="col-md-6 description"></div>
+                </div>
+                </div>
+
+                <div class="tab-2 col-md-6">
+                <label class="center tabs-controller tab-doctors upperCase" for="tab2-2">
+                  Médicos
+                </label>
+                <input id="tab2-2" name="tabs-two" type="radio">
+                <div class="doctors-info col-md-12">
+                  <div class="col-md-6 doctors-container"></div>
+                  <div class="col-md-6 doctors-description"></div>
+                </div>
+                </div>
+
+              </div>
+
+            </div>
+            </div>
+
+      </section>
+
+        </div>
+
   </div>
 </template>
 
@@ -20,7 +76,6 @@ export default {
   },*/
   data () {
     return {
-      name: process.static ? 'static' : (process.server ? 'server' : 'client'),
       specialities_details: {},
       title: 'Especialidades'
      }
@@ -38,42 +93,11 @@ export default {
 
       return {  specialities_details: specialities }
   },
-  /*async fetch ({ params, error }){
-    let name = params.name.split('-ou-').length > 1 ? params.name.split('-ou-').join(' / ') : params.name.split("-").join(" ");
-    let specialities = {};
-
-     await db.collection("specialities").where("name", "==", capitalizeEachWord(name)).get().then((querySnapshot) => {
-         querySnapshot.docs.map(doc => {
-           specialities = doc.data();
-           specialities.id = doc.id;
-         });
-      });
-
-      return { specialities_details : specialities }
-  },*/
-  async mounted() {
-    console.log("params:", process, this.$route.params); // Works here
-    //do something after mounting vue instance
-    if( process.static){
-      let name = this.$route.params.split('-ou-').length > 1 ? this.$route.params.split('-ou-').join(' / ') : this.$route.params.split("-").join(" ");
-      let specialities = {};
-
-      await db.collection("specialities").where("name", "==", capitalizeEachWord(name)).get().then((querySnapshot) => {
-          querySnapshot.docs.map(doc => {
-            specialities = doc.data();
-            specialities.id = doc.id;
-          });
-       });
-
-       return {  specialities_details: specialities }
-    }
-
-  },
   head () {
     return {
-     title: this.specialities_details.name + ' | Clinálamo',
+     title: this.specialities_details.name + ' - Clínica Médica Dos Álamos Lda',
      meta: [
-       { hid: this.specialities_details.id, name: this.specialities_details.name, content: this.specialities_details.description }
+       { hid: 'description', name: 'description', content: this.specialities_details.description }
      ]
    }
   }

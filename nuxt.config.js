@@ -9,19 +9,28 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'clinic',
+    title: 'Clinálamo - Clínica Médica Dos Álamos Lda',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'clinic web site' }
+      { hid: 'description', name: 'description', content: 'Sediada em Évora a Clinálamo - Clínica Médica dos Álamos, Lda. tem como objetivo principal de prestar cuidados assistênciais na área de medicina clínica. Faça uma marcação online, dispomos de uma vasta variedade de Especialidades e Exames.' },
+      { hid: 'author', name: 'author', content: 'SmartableWays' },
+      { hid: 'robots', name: 'robots', content: 'index, follow'},
+      { hid: 'og:title', property: 'og:title', content: 'http://clinalamo.pt/' },
+      { hid: 'og:description', property: 'og:description', content: 'Clinálamo - Clínica Médica Dos Álamos Lda. Venha visitar nos ou faça uma marcação online' },
+      { hid: 'og:image', property: 'og:image', content: 'http://clinalamo.pt/images/logo-smartTv.png' },
+      { hid: 'og:site_name', property: 'og:site_name', content: 'www.clinalamo.pt' },
+      { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
     ]
   },
   generate: {
     routes: function () {
-      const specialitiesRows = [];
+      const specialitiesUrls = [];
+      const examsUrls = [];
+      const steticsUrls = [];
       const settings = { timestampsInSnapshots: true};
 
       firebase.initializeApp({
@@ -34,18 +43,29 @@ module.exports = {
       });
       firebase.firestore().settings(settings);
 
-      /*routes especialidades*/
+      /*routes especialidades & stetics*/
       let specialities = firebase.firestore().collection("specialities").get().then((querySnapshot) => {
           querySnapshot.docs.map(doc => {
            const url =  doc.data().name.split('/').length > 1 ? doc.data().name.replace(/ /g,"").split('/').join("-ou-") : doc.data().name.split(" ").join("-");
-           specialitiesRows.push('/especialidades/' + url.toLowerCase());
-          })
-          return specialitiesRows
-       })
+           const section =  doc.data().name !== 'Análises Clínicas' && ( doc.data().section === "Especialidades" || doc.data().section === 'Ambas');
 
-       return Promise.all([specialities]).then(values => {
+           specialitiesRows.push( (section ? '/especialidades/' : '/estetica/') + url.toLowerCase());
+         });
+          return specialitiesRows
+       });
+
+       /*routes exams*/
+       let exames = firebase.firestore().collection("exams_types").get().then((querySnapshot) => {
+           querySnapshot.docs.map(doc => {
+            const url =  doc.data().name.split('/').length > 1 ? doc.data().name.replace(/ /g,"").split('/').join("-ou-") : doc.data().name.split(" ").join("-");
+            examsUrls.push('/exames/' + url.toLowerCase());
+          });
+           return examsUrls
+        });
+
+       return Promise.all([specialities, exames]).then(values => {
           return values.join().split(',');
-        })
+        });
     }
   },
   //modules: [
@@ -61,7 +81,7 @@ module.exports = {
   build: {
     vendor: ['jquery','bootstrap', 'firebase'],
     plugins: [
-         // set shortcuts as global for bootstrap
+     // set shortcuts as global for bootstrap
          new webpack.ProvidePlugin({
            $: 'jquery',
            jQuery: 'jquery',

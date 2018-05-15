@@ -9,8 +9,6 @@
         clinic web site
       </h2>
       <div class="links">
-        <nuxt-link to="/specialities">Especialidades</nuxt-link>
-        <nuxt-link to="/">Início</nuxt-link>
         <a
           href="https://nuxtjs.org/"
           target="_blank"
@@ -30,7 +28,15 @@ import AppLogo from '~/components/AppLogo.vue'
 export default {
   components: {
     AppLogo
-  }
+  },
+  /*head () {
+    return {
+     title: 'Estética - Clínica Médica Dos Álamos Lda',
+     meta: [
+       { hid: 'description', name: 'Estética Descrição', content: 'My custom estetica description' }
+     ]
+   }
+ }*/
 }
 </script>
 
