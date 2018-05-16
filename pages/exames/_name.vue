@@ -10,3 +10,58 @@ item.name +
 "</div>" +
 "</div>" +
 "</div>"; -->
+
+<template>
+  <div class="user">
+
+    <h3 > {{ exams_details.name }}</h3>
+    <p><nuxt-link to="/exames">Voltar à lista</nuxt-link></p>
+  </div>
+</template>
+
+<script>
+import { db } from '~/plugins/firebase.js'
+
+function capitalizeEachWord(str) {
+  return str.replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
+
+export default {
+  data () {
+    return {
+      exams_details: {}
+     }
+   },
+  async asyncData({ params, error }) {
+    let name = params.name.split('-ou-').length > 1 ? params.name.split('-ou-').join(' / ') : params.name.split("-").join(" ");
+    let exams = {};
+
+     await db.collection("exams_types").where("name", "==", capitalizeEachWord(name)).get().then((querySnapshot) => {
+         querySnapshot.docs.map(doc => {
+           exams = doc.data();
+           exams.id = doc.id;
+         });
+      });
+
+      return {  exams_details: exams }
+  },
+  head () {
+    return {
+     title: this.exams_details.name + ' - Clínica Médica Dos Álamos Lda',
+     meta: [
+       { hid: 'description', name: 'description', content: this.exams_details.name }
+     ]
+   }
+  }
+}
+</script>
+
+<style scoped>
+.user {
+  text-align: center;
+  margin-top: 200px;
+  font-family: sans-serif;
+}
+</style>

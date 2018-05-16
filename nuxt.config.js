@@ -49,9 +49,9 @@ module.exports = {
            const url =  doc.data().name.split('/').length > 1 ? doc.data().name.replace(/ /g,"").split('/').join("-ou-") : doc.data().name.split(" ").join("-");
            const section =  doc.data().name !== 'Análises Clínicas' && ( doc.data().section === "Especialidades" || doc.data().section === 'Ambas');
 
-           specialitiesRows.push( (section ? '/especialidades/' : '/estetica/') + url.toLowerCase());
+           specialitiesUrls.push( (section ? '/especialidades/' : '/estetica/') + url.toLowerCase());
          });
-          return specialitiesRows
+          return specialitiesUrls
        });
 
        /*routes exams*/

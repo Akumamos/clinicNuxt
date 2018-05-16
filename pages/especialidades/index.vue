@@ -39,7 +39,7 @@
                           <h5 style="overflow: hidden;">{{elem.name}}</h5>
                           <p></p>
                           <h5 v-for="item in elem.doctors" :key="item.id">
-                            <small class="role muted">{{item.name}}</small>
+                            <small class="role muted">{{ item.name }}</small>
                           </h5>
                           <p></p>
                       </div>
@@ -83,6 +83,10 @@ export default {
             //id set
             specialities.id = id;
             specialities.url = url.toLowerCase();
+
+            specialities.doctors.forEach(function (doctor) {
+              doctor.name = doctor.name.toString().replace(/,/g, "<br/>");
+            });
 
             items.push(specialities);
           }

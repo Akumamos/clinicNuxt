@@ -82,17 +82,17 @@ export default {
                   id = doc.id,
                   url = transformLink(doc.data().name);
 
-              //id set
               exams.id = id;
               exams.url = url.toLowerCase();
               types += doc.data().name.toString() + ', ';
 
+              exams.exams.forEach(function (exam) {
+                exam.name = exam.name.toString().replace(/,/g, "<br/>");
+              });
+
               items.push(exams);
-
-          })
-
-          console.log('items', items);
-       })
+          });
+       });
 
        return {
          examsRows: items,
@@ -115,11 +115,19 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .fa-info-circle{
 
 }
 .red {
   color: red;
+}
+
+ul{
+  width: 100%;
+}
+
+.specialities-item.col-md-3{
+
 }
 </style>

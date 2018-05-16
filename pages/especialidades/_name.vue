@@ -19,7 +19,7 @@
             </div><!--/.carousel-inner-->
         </div><!--/.carousel-->
     </section><!--/#main-slider-->
-    
+
     <div id="content-wrapper">
       <section id="item-content" class="white">
         <div class="container">
@@ -33,8 +33,11 @@
                 </label>
                 <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
                 <div class="info-description col-md-12">
-                  <div class="col-md-6 specialities-img">Sem Descrição</div>
-                  <div class="col-md-6 description"></div>
+                  <div class="col-md-6 specialities-img">
+                    <img :src="specialities_details.media[0].url" class='img-responsive img-blog shadow' style='margin-bottom: 20px;'/>
+                  </div>
+                  <div class="col-md-6 description" v-html="specialities_details.description">
+                  </div>
                 </div>
                 </div>
 
@@ -43,9 +46,28 @@
                   Médicos
                 </label>
                 <input id="tab2-2" name="tabs-two" type="radio">
-                <div class="doctors-info col-md-12">
-                  <div class="col-md-6 doctors-container"></div>
-                  <div class="col-md-6 doctors-description"></div>
+                <div class="doctors-info col-md-12" v-for="doctors in specialities_details.doctors" :key="doctors.id">
+                  <div class="col-md-6 doctors-container"  >
+                      <div class="doctors-item col-md-12" style="margin-bottom:25px; cursor:pointer;">
+                        <div class="center team-member" style="height: 100%">
+                          <div class="team-content fade-up" style="position:relative; box-shadow: 1px 3px 5px 0px #808080ad; height: 100%;">
+                            <i class="fa fa-info-circle" aria-hidden="true" style="position: absolute; top: 5px; right: 10px; font-size: 20px; color: #32c5d5;"></i>
+                            <h5 style="overflow: hidden;">
+                              {{doctors.name.trim()}}
+                            </h5>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div  class="col-md-6 doctors-description">
+                    <div class= "fade-up animated" style="display:none">
+                      <h3 class="upperCase">
+                        {{doctors.name}}
+                      </h3>
+                    <hr/>
+                       {{doctors.description}}
+                    </div>
+                  </div>
                 </div>
                 </div>
 
@@ -71,13 +93,11 @@ function capitalizeEachWord(str) {
 }
 
 export default {
-  /*validate({ params }) {
-    return !isNaN(+params.name)
-  },*/
   data () {
     return {
       specialities_details: {},
-      title: 'Especialidades'
+      title: 'Especialidades',
+      isSelect: false
      }
    },
   async asyncData({ params, error }) {
@@ -88,6 +108,7 @@ export default {
          querySnapshot.docs.map(doc => {
            specialities = doc.data();
            specialities.id = doc.id;
+           console.log('specialities', specialities);
          });
       });
 
@@ -100,7 +121,7 @@ export default {
        { hid: 'description', name: 'description', content: this.specialities_details.description }
      ]
    }
-  }
+ }
 }
 </script>
 
