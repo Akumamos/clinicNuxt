@@ -31,11 +31,11 @@
 
           <div class="container">
             <ul>
-              <li class="specialities-item col-md-3" style="margin-bottom:25px; cursor:pointer; height: 120px" v-for="elem in specialitiesRows" :key="elem.id">
+              <li class="specialities-item col-md-3" v-for="elem in specialitiesRows" :key="elem.id">
                 <nuxt-link :to="'/especialidades/'+elem.url ">
-                  <div class="center team-member" style="height: 100%">
-                      <div class="team-content " style="position:relative; box-shadow: 1px 3px 5px 0px #808080ad; height: 100%;">
-                        <i class="fa fa-info-circle" aria-hidden="true" style="position: absolute; top: 10px; right: 10px; font-size: 20px; color: #32c5d5;"></i>
+                  <div class="center team-member">
+                      <div class="team-content " >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
                           <h5 style="overflow: hidden;">{{elem.name}}</h5>
                           <p></p>
                           <h5 v-for="item in elem.doctors" :key="item.id">
@@ -107,8 +107,37 @@ export default {
 }
 </script>
 
-<style>
-.red {
-  color: red;
+<style scoped>
+.fa-info-circle{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #32c5d5;
+}
+
+li {
+  list-style: none;
+}
+
+ul {
+  width: 100%;
+}
+
+.team-content{
+  position:relative;
+  padding: 10px;
+  box-shadow: 1px 3px 5px 0px #808080ad;
+  min-height: 130px;
+}
+
+.team-member {
+  min-height: 130px;
+}
+
+.specialities-item.col-md-3{
+  margin-bottom:25px;
+  cursor:pointer;
+  min-height: 130px;
 }
 </style>
