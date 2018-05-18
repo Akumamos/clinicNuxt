@@ -12,10 +12,63 @@ item.name +
 "</div>"; -->
 
 <template>
-  <div class="user">
+  <div>
+    <section id="single-page-slider" class="no-margin">
+        <div class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="center gap fade-down section-heading">
+                                    <h2 class="main-title text-white">{{exams_details.name}}</h2>
+                                    <hr>
+                                      <p>EXAMES</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/.item-->
+            </div><!--/.carousel-inner-->
+        </div><!--/.carousel-->
+    </section><!--/#main-slider-->
 
-    <h3 > {{ exams_details.name }}</h3>
-    <p><nuxt-link to="/exames">Voltar à lista</nuxt-link></p>
+    <div id="content-wrapper">
+      <section id="item-content" class="white" style="padding-top: 0">
+        <div class="container">
+            <div class="gap"></div>
+            <div class="row">
+              <div class="exams-info col-md-12">
+                <div class="col-md-6 exams-container">
+                  <div class="exams-item col-md-12" v-for="(exam, index) in exams_details.exams" :key="exam.id" v-on:click="fetchDescription(exam.id, index)">
+                    <div class="center team-member">
+                      <div class="team-content" :class="{ active: exam.id === types_selected.id}">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        <h5 style="overflow: hidden;">
+                          {{exam.name}}
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 exams-description">
+                  <div class= "animated">
+                    <h3 class="upperCase">
+                    {{types_selected.name}}
+                    </h3>
+                  <hr/>
+                    <div v-html="types_selected.description"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+
+
+      </section>
+    </div>
+
   </div>
 </template>
 
@@ -31,7 +84,10 @@ function capitalizeEachWord(str) {
 export default {
   data () {
     return {
-      exams_details: {}
+      exams_details: {},
+      types_selected: {},
+      infoSelected: true,
+      contentSelected: false
      }
    },
   async asyncData({ params, error }) {
@@ -45,7 +101,10 @@ export default {
          });
       });
 
-      return {  exams_details: exams }
+      return {
+        exams_details: exams,
+        types_selected: exams.exams[0]
+       }
   },
   head () {
     return {
@@ -54,14 +113,56 @@ export default {
        { hid: 'description', name: 'description', content: this.exams_details.name }
      ]
    }
-  }
+ },
+ methods: {
+   fetchDescription(id, i) {
+     this.types_selected = i ? this.exams_details.exams[i] : this.exams_details.exams[0];
+   },
+   toggleClassInfo(type){
+     this.infoSelected = type === 'info';
+     this.contentSelected = !this.infoSelected;
+   }
+ }
 }
 </script>
 
 <style scoped>
-.user {
-  text-align: center;
-  margin-top: 200px;
-  font-family: sans-serif;
+.team-content.active {
+    border-bottom: 4px solid #00b29e;
 }
+
+h3{
+  font-size: 22px;
+  font-weight: 300;
+  color: #555;
+  line-height: 30px;
+}
+
+.team-content {
+  position:relative;
+  box-shadow: 1px 3px 5px 0px #808080ad;
+  height: 100%;
+}
+
+.team-content.active{
+  border-bottom: 4px solid #00b29e;
+}
+
+.fa-info-circle{
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 20px;
+  color: #32c5d5;
+}
+
+.exams-item{
+  margin-bottom:25px;
+  cursor:pointer;
+}
+
+.team-member{
+  height: 100%;
+}
+
 </style>

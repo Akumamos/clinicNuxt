@@ -212,39 +212,3 @@ $(document).ready(function() {
     interval: 4000
   });
 });
-
-/*-----------------------------------------------------------------------------------*/
-/*  CONTACT FORM
-/*-----------------------------------------------------------------------------------*/
-jQuery(document).ready(function($) {
-  "use strict";
-
-  $("#contactform").submit(function() {
-    var action = $(this).attr("action");
-    $("#message").slideUp(750, function() {
-      $("#message").hide();
-      $("#submit").attr("disabled", "disabled");
-      $.post(
-        action,
-        {
-          name: $("#name").val(),
-          email: $("#email").val(),
-          website: $("#website").val(),
-          comments: $("#comments").val()
-        },
-        function(data) {
-          document.getElementById("message").innerHTML = data;
-          $("#message").slideDown("slow");
-          $("#submit").removeAttr("disabled");
-          if (data.match("success") != null) $("#contactform").slideUp("slow");
-          $(window).trigger("resize");
-        }
-      );
-    });
-    return false;
-  });
-});
-
-/*-----------------------------------------------------------------------------------*/
-/*  PRELOADER
-/*-----------------------------------------------------------------------------------*/
