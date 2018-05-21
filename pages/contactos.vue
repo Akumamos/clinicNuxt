@@ -28,6 +28,19 @@ export default {
    }
     // Set Meta Tags for this Page
   },
+  mounted() {
+    //do something after mounting vue instance
+    $(".tile-progress .tile-header").matchHeight();
+    var footerHeight = jQuery("#footer-wrapper").outerHeight();
+    jQuery("#content-wrapper").css("margin-bottom", footerHeight);
+
+    var windowsHeight = jQuery(window).height();
+    var navHeight = jQuery("navbar-fixed-top").outerHeight();
+    var newHeight = windowsHeight + 30;
+
+    jQuery("#main-slider").css("height", newHeight + "px");
+    jQuery("#single-page-slider").css("min-height", windowsHeight / 3 + "px")
+  }
 }
 </script>
 

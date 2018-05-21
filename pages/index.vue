@@ -37,7 +37,7 @@
               </div>
           </div>
           <div class="row">
-              <div class="col-md-12 fade-up about-description" v-html="details.description">
+              <div class="col-md-12 about-description" v-html="details.description">
               </div>
           </div>
           <div class="row">
@@ -86,12 +86,12 @@
           <div class="gap"></div>
             <div class="container">
                 <div class="row">
-                    <div class="center gap fade-down section-heading">
+                    <div class="center gap  section-heading">
                           <h2 class="main-title">O que dizem sobre nós</h2>
                           <hr>
                           <div class="gap"></div>
                       </div>
-                    <div class='col-md-offset-2 col-md-8 fade-up'>
+                    <div class='col-md-offset-2 col-md-8'>
                         <div class="carousel slide" data-ride="carousel" id="quote-carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
@@ -178,10 +178,9 @@ export default {
          return {
            details: {
              description: values[0].description,
-             online_appointments:24,
-             specialities: values[1],
-             doctors: values[2]
-
+             online_appointments:26 || 0,
+             specialities: values[1] || 0,
+             doctors: values[2] || 0
            }
           }
        });
@@ -191,6 +190,33 @@ export default {
   head () {
     return {
     title: 'Clinálamo - Clínica Médica Dos Álamos Lda'
+   }
+ },
+ mounted() {
+   //do something after mounting vue instance
+   $(".tile-progress .tile-header").matchHeight();
+   var footerHeight = jQuery("#footer-wrapper").outerHeight();
+   jQuery("#content-wrapper").css("margin-bottom", footerHeight);
+
+   var windowsHeight = jQuery(window).height();
+   var navHeight = jQuery("navbar-fixed-top").outerHeight();
+   var newHeight = windowsHeight + 30;
+
+   jQuery("#main-slider").css("height", newHeight + "px");
+   jQuery("#single-page-slider").css("min-height", windowsHeight / 3 + "px")
+
+   $("#main-slider .carousel-content").flexVerticalCenter({
+     cssAttribute: "padding-top",
+     verticalOffset: '50px'
+   });
+
+   if (
+     $(document).height() - $(window).height() - $(window).scrollTop() <
+     1000
+   ) {
+     $("#footer-wrapper").css("z-index", "4");
+   } else {
+     $("#footer-wrapper").css("z-index", "1");
    }
  },
  methods: {
@@ -206,5 +232,15 @@ export default {
 </script>
 
 <style>
+.backstretch:before {
+    content: "";
+    background-image: none !important;
+    background-color: rgba(0, 0, 0, 0.4);
+    min-width: 100%;
+    height: 100%;
+    position: absolute;
+    display: block;
+    z-index: -1;
+}
 
 </style>

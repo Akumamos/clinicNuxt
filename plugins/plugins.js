@@ -242,9 +242,9 @@ jQuery.easing["jswing"]=jQuery.easing["swing"];jQuery.extend(jQuery.easing,{def:
         resizer();
       }
 
-      // Call again to set after window (frames, images, etc) loads.
-      $(window).load(function () {
-          resizer();
+      $(window).on('load', function() {
+        resizer();
+
       });
 
     });

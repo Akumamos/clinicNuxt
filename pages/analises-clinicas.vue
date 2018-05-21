@@ -26,7 +26,7 @@
             <div class="gap"></div>
 
             <div class="row">
-                <div class="aclinics-section col-md-12 fade-up" v-html="aclinicsItem.description">                      
+                <div class="aclinics-section col-md-12 fade-up" v-html="aclinicsItem.description">
                 </div>
             </div>
 
@@ -71,7 +71,20 @@ export default {
        { hid: 'aclinics', name: 'Análises Descrição', content: 'My custom Análises description' }
      ]
    }
-  }
+ },
+ mounted() {
+   //do something after mounting vue instance
+   $(".tile-progress .tile-header").matchHeight();
+   var footerHeight = jQuery("#footer-wrapper").outerHeight();
+   jQuery("#content-wrapper").css("margin-bottom", footerHeight);
+
+   var windowsHeight = jQuery(window).height();
+   var navHeight = jQuery("navbar-fixed-top").outerHeight();
+   var newHeight = windowsHeight + 30;
+
+   jQuery("#main-slider").css("height", newHeight + "px");
+   jQuery("#single-page-slider").css("min-height", windowsHeight / 3 + "px")
+ }
 }
 </script>
 

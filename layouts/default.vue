@@ -25,8 +25,44 @@
           </div>
       </header><!--/header-->
     <nuxt/>
+    <div id="footer-wrapper">
+        <footer id="footer" class="">
+            <div class="container">
+              <div class="schedule">
+                <div class="col-sm-6" style="margin-bottom: 15px">
+                  <span class="footer-information" style="margin-bottom: 5px; font-weight:bold">Horário de Funcionamento</span><br/>
+                  <span>Segunda à Sexta-feira</span><br/>
+                  <span>Manhã das 10:00h às 12:30h</span><br/>
+                  <span>Tarde das 14:00h às 20h</span><br/>
+                </div>
+                <div class="col-sm-6" style="margin-bottom: 15px">
+                  <span class="footer-information" style="margin-bottom: 5px; font-weight:bold">Contactos</span><br/>
+                  <span class="fa fa-home" style="margin-right: 10px;"></span>
+                  <span>Rua António José Couvinha, Lote 16 - R/C Esq.º  Urbanização dos Álamo 7005-296 Évora  Portugal </span><br/>
+                  <span class="fa fa-phone" style="margin-right: 10px;"></span><span>266 745 990</span><br/>
+                  <span class="fa fa-fax" style="margin-right: 10px;"></span><span>266 745 999</span><br/>
+                  <span class="fa fa-mobile" style="margin-right: 10px;"></span><span>926 649 111</span><br/>
+                  <span class="fa fa-envelope" style="margin-right: 10px;"></span><span>clinalamo@gmail.com</span><br/>
+                  <span class="fa fa-facebook" style="margin-right: 10px;"></span> <a href="https://www.facebook.com/clinalamo.lda" target="_blank">Clinálamo</a> <br/>
+                </div>
+
+              </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        &copy; 2018 <a target="_blank" href="#" title="Smartable Ways">SmartableWays</a>. Todos os Direitos Reservados.
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="pull-right">
+                            <li><a id="gototop" class="gototop" href="#"><i class="fa fa-chevron-up"></i></a></li><!--#gototop-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer><!--/#footer-->
+    </div>
   </div>
 </template>
+
 
 <style>
 

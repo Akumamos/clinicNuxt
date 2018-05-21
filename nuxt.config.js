@@ -1,8 +1,6 @@
 const webpack = require('webpack');
 const firebase = require('firebase/app');
 require('firebase/firestore');
-//import { db } from '~/plugins/firebase.js'
-
 
 module.exports = {
   /*
@@ -68,6 +66,13 @@ module.exports = {
         });
     }
   },
+  transition: {
+    name: 'page',
+    mode: 'out-in',
+    beforeEnter (el) {
+      console.log('Before enter...');
+    }
+  },
   //modules: [
   //   '@nuxtjs/sitemap'
   //],
@@ -79,15 +84,15 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['jquery','bootstrap', 'firebase'],
-    plugins: [
+    vendor: ['firebase'],
+    /*plugins: [
      // set shortcuts as global for bootstrap
          new webpack.ProvidePlugin({
            $: 'jquery',
            jQuery: 'jquery',
            'window.jQuery': 'jquery'
          })
-     ],
+     ],*/
     /*
     ** Run ESLint on save
     */
@@ -111,6 +116,8 @@ module.exports = {
   ],
   plugins:[
     '~/plugins/firebase.js',
+    { src: '~/plugins/jquery.js', ssr: false },
+    { src: '~/plugins/bootstrap.min.js', ssr: false },
     { src: '~/plugins/plugins.js', ssr: false },
     { src: '~/plugins/jquery.isotope.min.js', ssr: false },
     { src: '~/plugins/init.js', ssr: false }

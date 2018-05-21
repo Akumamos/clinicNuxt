@@ -1,18 +1,4 @@
-/*
-var globalConstants =
-    "https://firestore.googleapis.com/v1beta1/projects/clinalamo-3d38c/databases/(default)/documents/",
-  fireBaseConfig = {
-    apiKey: "AIzaSyBuJ_QvagsAni6C4pVWM5uAqtsac7knoGk",
-    authDomain: "clinalamo-3d38c.firebaseapp.com",
-    databaseURL: "https://clinalamo-3d38c.firebaseio.com",
-    projectId: "clinalamo-3d38c",
-    storageBucket: "clinalamo-3d38c.appspot.com",
-    messagingSenderId: "750845688635"
-  };
-
-firebase.initializeApp(fireBaseConfig);*/
 var scroll_pos = 0;
-
 
 jQuery(window).on('load', function() {
   "use strict";
@@ -33,10 +19,21 @@ jQuery(window).on('load', function() {
   }
 });
 
+jQuery(document).ready(function($){
+'use strict';
+
+jQuery('body').backstretch([
+    require('~/assets/bg/bg-3.jpg'),
+    require('~/assets/bg/bg-2.jpg'),
+    require('~/assets/bg/bg-6.jpg'),
+    require('~/assets/bg/bg-7.jpg')
+  ], {duration: 5000, fade: 1500, centeredY: true });
+
+});
+
 jQuery(function($) {
   "use strict";
   $(".tile-progress .tile-header").matchHeight();
-
   var footerHeight = jQuery("#footer-wrapper").outerHeight();
   jQuery("#content-wrapper").css("margin-bottom", footerHeight);
 
@@ -173,9 +170,9 @@ jQuery(document).ready(function($) {
 /*-----------------------------------------------------------------------------------*/
 /*  SNOOOOOOOOTH SCROLL - SO SMOOTH
 /*-----------------------------------------------------------------------------------*/
-$(function() {
+jQuery(function() {
   "use strict";
-  $("a[href*=\\#]:not([href=\\#])").click(function() {
+  jQuery("a[href*=\\#]:not([href=\\#])").click(function() {
     if (
       location.pathname.replace(/^\//, "") ==
         this.pathname.replace(/^\//, "") &&
@@ -199,15 +196,15 @@ $(function() {
 /*-----------------------------------------------------------------------------------*/
 /*  CAROUSEL
 /*-----------------------------------------------------------------------------------*/
-$(document).ready(function() {
+jQuery(document).ready(function() {
   "use strict";
   //Set the carousel options
-  $("#quote-carousel").carousel({
+  jQuery("#quote-carousel").carousel({
     pause: true,
     interval: 4000
   });
 
-  $("#scroller").carousel({
+  jQuery("#scroller").carousel({
     pause: true,
     interval: 4000
   });
