@@ -13,18 +13,21 @@
               </div>
               <div class="collapse navbar-collapse">
                   <ul class="nav navbar-nav navbar-right" itemtype="http://www.schema.org/SiteNavigationElement">
-                      <li><nuxt-link class="nav-item" to="/">Início</nuxt-link></li>
-                      <li itemprop="name"><a itemprop="url" href="#" data-toggle="modal" data-target="#myModalHorizontal">Marcações Online</a></li>
-                      <li><nuxt-link class="nav-item" to="/especialidades/">Especialidades</nuxt-link></li>
-                      <li><nuxt-link class="nav-item" to="/exames/">Exames</nuxt-link></li>
-                      <li><nuxt-link class="nav-item" to="/analises-clinicas/">Análises Clínicas</nuxt-link></li>
-                      <li><nuxt-link class="nav-item" to="/estetica/">Estética</nuxt-link></li>
-                      <li><nuxt-link class="nav-item" to="/contactos/">Contactos</nuxt-link></li>
+                      <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/">Início</nuxt-link></li>
+                      <li v-on:click="closeMenu" itemprop="name"><a itemprop="url" href="#" data-toggle="modal" data-target="#myModalHorizontal">Marcações Online</a></li>
+                      <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/exames/">Exames</nuxt-link></li>
+                      <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/especialidades/">Especialidades</nuxt-link></li>
+                      <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/analises-clinicas/">Análises Clínicas</nuxt-link></li>
+                      <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/estetica/">Estética</nuxt-link></li>
+                      <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/contactos/">Contactos</nuxt-link></li>
                   </ul>
               </div>
           </div>
       </header><!--/header-->
     <nuxt/>
+    <div>
+      <OnlineAppointments/>
+    </div>
     <div id="footer-wrapper">
         <footer id="footer" class="">
             <div class="container">
@@ -49,7 +52,8 @@
               </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        &copy; 2018 <a target="_blank" href="#" title="Smartable Ways">SmartableWays</a>. Todos os Direitos Reservados.
+                        &copy; 2018 <a target="_blank" href="#" title="Smartable Ways">SmartableWays</a>.
+                        Todos os Direitos Reservados. | <nuxt-link class="nav-item" to="/politica-de-privacidade/">Política de Privacidade</nuxt-link>
                     </div>
                     <div class="col-sm-6">
                         <ul class="pull-right">
@@ -63,6 +67,19 @@
   </div>
 </template>
 
+<script>
+import OnlineAppointments from '~/components/OnlineAppointments.vue'
+export default {
+  components: {
+    OnlineAppointments
+  },
+  methods: {
+    closeMenu() {
+      $('.navbar-toggle').click();
+    }
+  }
+}
+</script>
 
 <style>
 

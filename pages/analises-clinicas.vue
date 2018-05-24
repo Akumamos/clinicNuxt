@@ -53,10 +53,8 @@ export default {
    },
   async asyncData (context) {
       let examsanalysis = {};
-      console.log('asyncData');
       await db.collection("analysis").get().then((querySnapshot) => {
           querySnapshot.docs.map(doc => {
-              console.log('Doc', doc.data());
               examsanalysis = doc.data();
 
           })
@@ -68,7 +66,14 @@ export default {
     return {
      title: 'Análises Clínicas - Clínica Médica Dos Álamos Lda',
      meta: [
-       { hid: 'aclinics', name: 'Análises Descrição', content: 'My custom Análises description' }
+       { hid: 'description', name: 'description', content: 'Análises Clínicas - Clínica Médica Dos Álamos Lda, possui um posto de recolha de análises clínicas, em parceria com os Laboratórios do Professor Germano de Sousa' },
+       { hid: 'og:title', property: 'og:title', content: 'http://clinalamo.pt/analises-clinicas/' },
+       { hid: 'og:description', property: 'og:description', content: 'Análises Clínicas - Clínica Médica Dos Álamos Lda, possui um posto de recolha de análises clínicas, em parceria com os Laboratórios do Professor Germano de Sousa' },
+       { hid: 'og:site_name', property: 'og:site_name', content: 'www.clinalamo.pt/analises-clinicas/' },
+       { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/analises-clinicas/'}
+     ],     
+     link: [
+       { rel: 'canonical', href:'http://clinalamo.pt/analises-clinicas/' }
      ]
    }
  },
@@ -84,6 +89,20 @@ export default {
 
    jQuery("#main-slider").css("height", newHeight + "px");
    jQuery("#single-page-slider").css("min-height", windowsHeight / 3 + "px")
+
+   $("#main-slider .carousel-content").flexVerticalCenter({
+     cssAttribute: "padding-top",
+     verticalOffset: '160px'
+   });
+
+   if (
+     $(document).height() - $(window).height() - $(window).scrollTop() <
+     1000
+   ) {
+     $("#footer-wrapper").css("z-index", "4");
+   } else {
+     $("#footer-wrapper").css("z-index", "1");
+   }
  }
 }
 </script>

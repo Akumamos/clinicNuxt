@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <div class="tile-progress center tile-cyan center bounce-in">
+                    <div class="tile-progress center tile-cyan center">
                         <div class="tile-header">
                             <h3 class="upperCase">Especialidades</h3>
                         </div>
@@ -143,7 +143,8 @@
 
 
 <script>
-import { db } from '~/plugins/firebase.js'
+import { db } from '~/plugins/firebase.js';
+
 
 export default {
   data () {
@@ -152,6 +153,9 @@ export default {
      }
    },
   async asyncData({ params, error }) {
+
+
+
     let item = {},
         specialitiesItem = {},
         doctorsItem = {};
@@ -178,11 +182,13 @@ export default {
          return {
            details: {
              description: values[0].description,
-             online_appointments:26 || 0,
+             online_appointments: 33 || 0,
              specialities: values[1] || 0,
              doctors: values[2] || 0
            }
           }
+
+          this.$nuxt.$loading.finish();
        });
 
 
@@ -207,7 +213,7 @@ export default {
 
    $("#main-slider .carousel-content").flexVerticalCenter({
      cssAttribute: "padding-top",
-     verticalOffset: '50px'
+     verticalOffset: '160px'
    });
 
    if (
@@ -218,6 +224,26 @@ export default {
    } else {
      $("#footer-wrapper").css("z-index", "1");
    }
+
+   jQuery("a[href*=\\#]:not([href=\\#])").click(function() {
+     if (
+       location.pathname.replace(/^\//, "") ==
+         this.pathname.replace(/^\//, "") &&
+       location.hostname == this.hostname
+     ) {
+       var target = $(this.hash);
+       target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
+       if (target.length) {
+         $("html,body").animate(
+           {
+             scrollTop: target.offset().top
+           },
+           1000
+         );
+         return false;
+       }
+     }
+   });
  },
  methods: {
    fetchDescription(id, i) {

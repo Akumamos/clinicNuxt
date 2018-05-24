@@ -24,7 +24,7 @@
 
         <div id="search-wrapper">
             <div class="container">
-                <input id="search-box" placeholder="Pesquisar por Especialidade ou Médico">
+                <input id="search-box" placeholder="Pesquisar por Especialidade ou Médico" v-model="search">
             </div>
         </div>
         <div class="gap"></div>
@@ -32,7 +32,7 @@
           <div class="container">
             <ul>
               <li class="specialities-item col-md-3" v-for="elem in specialitiesRows" :key="elem.id">
-                <nuxt-link :to="'/especialidades/'+elem.url ">
+                <nuxt-link :to="'/especialidades/'+elem.url+'/' ">
                   <div class="center team-member">
                       <div class="team-content " >
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -68,7 +68,8 @@ export default {
   data () {
      return {
        specialitiesRows: [],
-       title: 'Especialidades'
+       title: 'Especialidades',
+       search: ''
       }
    },
   async asyncData (context) {
@@ -99,8 +100,15 @@ export default {
     return {
      title: 'Especialidades - Clínica Médica Dos Álamos Lda',
      meta: [
-       { hid: 'description', name: 'description', content: 'My custom especialidades description' },
+       { hid: 'description', name: 'description', content: 'Na Clinálamo encontra um variedade de especialidades, caso tenho alguma dúvida não hesite em contactar nos através do 266 745 990 ou 926 649 111. Venha visitar nos em Évora ou faça uma marcação online' },
+       { hid: 'og:title', property: 'og:title', content: 'http://clinalamo.pt/especialidades/' },
+       { hid: 'og:description', property: 'og:description', content: 'Especialidades - Clínica Médica Dos Álamos Lda. Venha visitar nos em Évora ou faça uma marcação online' },
+       { hid: 'og:site_name', property: 'og:site_name', content: 'www.clinalamo.pt/especialidades/' },
+       { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/especialidades/'}
      ],
+     link: [
+       { rel: 'canonical', href: 'http://clinalamo.pt/especialidades/' }
+     ]
    }
  },
  mounted() {
@@ -115,6 +123,47 @@ export default {
 
    jQuery("#main-slider").css("height", newHeight + "px");
    jQuery("#single-page-slider").css("min-height", windowsHeight / 3 + "px")
+
+   $("#main-slider .carousel-content").flexVerticalCenter({
+     cssAttribute: "padding-top",
+     verticalOffset: '160px'
+   });
+
+   if (
+     $(document).height() - $(window).height() - $(window).scrollTop() <
+     1000
+   ) {
+     $("#footer-wrapper").css("z-index", "4");
+   } else {
+     $("#footer-wrapper").css("z-index", "1");
+   }
+
+   $("#search-box").keyup(function() {
+     var filter = this.value.toUpperCase(),
+       specialities = $(".specialities-item ");
+
+     for (var i = 0; i < specialities.length; i++) {
+       var item = specialities[i];
+       if (item) {
+         if (item.innerText.toUpperCase().indexOf(filter) > -1) {
+           item.style.display = "";
+         } else {
+           item.style.display = "none";
+         }
+       }
+     }
+   })
+ },
+ methods: {
+   filterList(items) {
+     return items.filter(item => {
+        var docExist = true;
+        item.doctors.forEach(doctor => {
+          docExist = doctor.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1;
+        });
+        return item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1 || docExist
+      })
+   }
  }
 }
 </script>

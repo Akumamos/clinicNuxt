@@ -138,7 +138,7 @@ jQuery(document).ready(function($) {
 
     $("#main-slider .carousel-content").flexVerticalCenter({
     cssAttribute: "padding-top",
-    verticalOffset: '50px'
+    verticalOffset: '90px'
   });
 });
 

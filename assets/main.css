@@ -7,6 +7,10 @@
   opacity: 0;
 }
 
+
+.content-wrapper{
+  min-height: 400px;
+}
 .navbar-brand {
   float: left;
   height: 123px !important;
@@ -1964,7 +1968,7 @@ img.author-box-image {
   background-color: #fff;
   color: #202020;
   box-shadow: 1px 3px 5px 1px #808080ad;
-  height: 150px;
+  height: 140px;
 }
 
 .tile-progress.tile-cyan .tile-progressbar span {

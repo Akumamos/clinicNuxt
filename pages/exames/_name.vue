@@ -1,16 +1,3 @@
-<!--"<div id='" +
-item.id +
-"'' class='exams-item col-md-12' style='margin-bottom:25px; cursor:pointer;'>" +
-"<div class='center' style='height: 100%'>" +
-"<div class='team-content fade-up' style='position:relative; box-shadow: 1px 3px 5px 0px #808080ad; height: 100%;'>" +
-"<i class='fa fa-info-circle' aria-hidden='true' style='position: absolute; top: 5px; right: 10px; font-size: 20px; color: #32c5d5;'></i>" +
-"<h5 style='overflow: hidden;'>" +
-item.name +
-"</h5>" +
-"</div>" +
-"</div>" +
-"</div>"; -->
-
 <template>
   <div>
     <section id="single-page-slider" class="no-margin">
@@ -86,31 +73,48 @@ export default {
     return {
       exams_details: {},
       types_selected: {},
+      types_name: '',
+      exams_canonical_url: '',
       infoSelected: true,
-      contentSelected: false
+      doctorsSelected: false
      }
    },
   async asyncData({ params, error }) {
     let name = params.name.split('-ou-').length > 1 ? params.name.split('-ou-').join(' / ') : params.name.split("-").join(" ");
     let exams = {};
+    let names_list = [];
 
      await db.collection("exams_types").where("name", "==", capitalizeEachWord(name)).get().then((querySnapshot) => {
          querySnapshot.docs.map(doc => {
            exams = doc.data();
            exams.id = doc.id;
+
+           exams.exams.forEach(function (value, key) {
+             names_list.push(value.name);
+            });
+
          });
       });
 
       return {
         exams_details: exams,
-        types_selected: exams.exams[0]
+        types_selected: exams.exams[0],
+        types_name: names_list.toString(),
+        exames_canonical_url: params.name
        }
   },
   head () {
     return {
      title: this.exams_details.name + ' - Clínica Médica Dos Álamos Lda',
      meta: [
-       { hid: 'description', name: 'description', content: this.exams_details.name }
+       { hid: 'description', name: 'description', content: 'Exame ' + this.exams_details.name + '. Tipos de Exame: ' + this.types_name + '. Venha visitar nos em Évora, faça a sua marcação através do 266 745 990 ou 926 649 111 ou online.' },
+       { hid: 'og:title', property: 'og:title', content: 'http://clinalamo.pt/exames/' + this.exames_canonical_url+'/' },
+       { hid: 'og:description', property: 'og:description', content: 'Estética ' + this.exams_details.name + '. Tipos de Exame: ' + this.types_name + '. Venha visitar nos em Évora, faça a sua marcação através do 266 745 990 ou 926 649 111 ou online.' },
+       { hid: 'og:site_name', property: 'og:site_name', content: 'www.clinalamo.pt/exames/'+ this.exames_canonical_url+'/' },
+       { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/exames/' + this.exames_canonical_url+'/'}
+     ],
+     link: [
+       { rel: 'canonical', href: 'http://clinalamo.pt/exames/' + this.exames_canonical_url+'/' }
      ]
    }
  },
@@ -126,6 +130,20 @@ export default {
 
    jQuery("#main-slider").css("height", newHeight + "px");
    jQuery("#single-page-slider").css("min-height", windowsHeight / 3 + "px")
+
+   $("#main-slider .carousel-content").flexVerticalCenter({
+     cssAttribute: "padding-top",
+     verticalOffset: '160px'
+   });
+
+   if (
+     $(document).height() - $(window).height() - $(window).scrollTop() <
+     1000
+   ) {
+     $("#footer-wrapper").css("z-index", "4");
+   } else {
+     $("#footer-wrapper").css("z-index", "1");
+   }
  },
  methods: {
    fetchDescription(id, i) {

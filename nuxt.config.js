@@ -16,12 +16,22 @@ module.exports = {
       { hid: 'robots', name: 'robots', content: 'index, follow'},
       { hid: 'og:title', property: 'og:title', content: 'http://clinalamo.pt/' },
       { hid: 'og:description', property: 'og:description', content: 'Clinálamo - Clínica Médica Dos Álamos Lda. Venha visitar nos ou faça uma marcação online' },
-      { hid: 'og:image', property: 'og:image', content: 'http://clinalamo.pt/images/logo-smartTv.png' },
+      { hid: 'og:image', property: 'og:image', content: 'http://clinalamo.pt/logo-comp.png' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'www.clinalamo.pt' },
-      { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/'}
+      { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/'},
+      { hid: 'google-site-verification', property: 'google-site-verification', content:'GvncAW5mhdo0cu6QQHlI0e0Im_eplT9z74ACCjVXAyI'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' },
+      { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' },
+      { rel: 'stylesheet', href: '//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css' },
+      { rel: 'canonical', href: 'http://clinalamo.pt/' }
+    ],
+    script: [
+     { src: 'https://unpkg.com/sweetalert/dist/sweetalert.min.js' },
+     { src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true'},
+     { src: '//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js'},
     ]
   },
   generate: {
@@ -69,22 +79,25 @@ module.exports = {
   transition: {
     name: 'page',
     mode: 'out-in',
-    beforeEnter (el) {
-      console.log('Before enter...');
-    }
+    type: 'animation'
+
   },
-  //modules: [
-  //   '@nuxtjs/sitemap'
-  //],
+  modules: [
+    '@nuxtjs/moment',
+    ['@nuxtjs/component-cache', {
+     max: 10000,
+     maxAge: 1000 * 60 * 60
+   }]
+  ],
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: '~/components/loading.vue',
   /*
   ** Build configuration
   */
   build: {
-    vendor: ['firebase'],
+    vendor: ['moment'],
     /*plugins: [
      // set shortcuts as global for bootstrap
          new webpack.ProvidePlugin({
@@ -112,11 +125,15 @@ module.exports = {
        '~/assets/form-elements.css',
        '~/assets/multi-step.css',
        '~/assets/bootstrap.css',
+       '~/assets/bootstrap-datepicker3.min.css',
        '~/assets/main.css'
   ],
   plugins:[
     '~/plugins/firebase.js',
     { src: '~/plugins/jquery.js', ssr: false },
+    { src: '~/plugins/cookies.js', ssr: false },
+    { src: '~/plugins/bootstrap-datepicker.min.js', ssr: false },
+    { src: '~/plugins/bootstrap-datepicker.pt.min.js', ssr: false },
     { src: '~/plugins/bootstrap.min.js', ssr: false },
     { src: '~/plugins/plugins.js', ssr: false },
     { src: '~/plugins/jquery.isotope.min.js', ssr: false },

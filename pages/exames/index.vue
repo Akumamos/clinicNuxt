@@ -24,7 +24,7 @@
 
         <div id="search-wrapper">
             <div class="container">
-                <input id="search-box" placeholder="Pesquisar por Exame">
+                <input id="search-box" placeholder="Pesquisar por Exame" v-model="search">
             </div>
         </div>
         <div class="gap"></div>
@@ -32,7 +32,7 @@
           <div class="container">
             <ul>
               <li class="specialities-item col-md-3" v-for="elem in examsRows" :key="elem.id">
-                <nuxt-link :to="'/exames/'+elem.url ">
+                <nuxt-link :to="'/exames/'+elem.url+'/' ">
                   <div class="center team-member">
                       <div class="team-content">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -69,7 +69,8 @@ export default {
      return {
        examsRows: [],
        examsTypes: '',
-       title: 'Exames por Especialidade'
+       title: 'Exames por Especialidade',
+       search: ''
       }
    },
   async asyncData (context) {
@@ -103,12 +104,14 @@ export default {
     return {
      title: 'Exames - Clínica Médica Dos Álamos Lda',
      meta: [
-       { hid: 'description', name: 'description', content: 'Na Clinálamo dispomos de vários exames: ' + this.examsTypes + '. Pode marcar um exame através do nosso contacto 266 745 990/926 649 111 ou marcação online' },
-       { hid: 'og:title', property: 'og:title', content: 'http://clinalamo.pt/exames' },
+       { hid: 'description', name: 'description', content: 'Na Clinálamo dispomos de vários exames: ' + this.examsTypes + '. Pode marcar um exame através do nosso contacto 266 745 990/926 649 111 ou marcação online. Venha visitar nos em Évora' },
+       { hid: 'og:title', property: 'og:title', content: 'http://clinalamo.pt/exames/' },
        { hid: 'og:description', property: 'og:description', content: 'Na Clinálamo dispomos de vários exames: ' + this.examsTypes + '. Pode marcar um exame através do nosso contacto 266 745 990/926 649 111 ou marcação online' },
-       { hid: 'og:image', property: 'og:image', content: 'http://clinalamo.pt/images/logo-smartTv.png' },
-       { hid: 'og:site_name', property: 'og:site_name', content: 'www.clinalamo.pt/exames' },
-       { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/exames'}
+       { hid: 'og:site_name', property: 'og:site_name', content: 'www.clinalamo.pt/exames/' },
+       { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/exames/'}
+     ],
+     link: [
+       { rel: 'canonical', href: 'http://clinalamo.pt/exames/' }
      ]
    }
  },
@@ -125,7 +128,50 @@ export default {
    jQuery("#main-slider").css("height", newHeight + "px");
    jQuery("#single-page-slider").css("min-height", windowsHeight / 3 + "px")
 
-   
+   $("#main-slider .carousel-content").flexVerticalCenter({
+     cssAttribute: "padding-top",
+     verticalOffset: '160px'
+   });
+
+   if (
+     $(document).height() - $(window).height() - $(window).scrollTop() <
+     1000
+   ) {
+     $("#footer-wrapper").css("z-index", "4");
+   } else {
+     $("#footer-wrapper").css("z-index", "1");
+   }
+
+   $("#search-box").keyup(function() {
+     var filter = this.value.toUpperCase(),
+       specialities = $(".specialities-item ");
+
+     for (var i = 0; i < specialities.length; i++) {
+       var item = specialities[i];
+       if (item) {
+         if (item.innerText.toUpperCase().indexOf(filter) > -1) {
+           item.style.display = "";
+         } else {
+           item.style.display = "none";
+         }
+       }
+     }
+   })
+
+ },
+ methods: {
+   filterList(items) {
+     return items.filter(item => {
+        var examsExist = true;
+
+        item.exams.forEach(exam => {
+          if(exam.name.toLowerCase() === this.search.toLowerCase())
+            examsExist = exam.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1;
+        });
+
+        return item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1 || examsExist;
+      })
+   }
  }
 }
 </script>

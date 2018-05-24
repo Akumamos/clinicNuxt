@@ -96,8 +96,9 @@ export default {
   data () {
     return {
       specialities_details: {},
-      title: 'Especialidades',
       doctors_selected: {},
+      doctors_name: '',
+      specialities_canonical_url: '',
       infoSelected: true,
       doctorsSelected: false
      }
@@ -105,24 +106,39 @@ export default {
   async asyncData({ params, error }) {
     let name = params.name.split('-ou-').length > 1 ? params.name.split('-ou-').join(' / ') : params.name.split("-").join(" ");
     let specialities = {};
+    let names_list = []
 
      await db.collection("specialities").where("name", "==", capitalizeEachWord(name)).get().then((querySnapshot) => {
          querySnapshot.docs.map(doc => {
            specialities = doc.data();
            specialities.id = doc.id;
+
+           specialities.doctors.forEach(function (value, key) {
+             names_list.push(value.name);
+            });
+
          });
       });
 
       return {
         specialities_details: specialities,
-        doctors_selected: specialities.doctors[0]
+        doctors_selected: specialities.doctors[0],
+        doctors_name: names_list.toString(),
+        specialities_canonical_url: params.name
        }
   },
   head () {
     return {
      title: this.specialities_details.name + ' - Clínica Médica Dos Álamos Lda',
      meta: [
-       { hid: 'description', name: 'description', content: this.specialities_details.description }
+       { hid: 'description', name: 'description', content: 'Estética ' + this.specialities_details.name + '. Médicos: ' + this.doctors_name + '. Venha visitar nos em Évora, faça a sua marcação através do 266 745 990 ou 926 649 111 ou online.' },
+       { hid: 'og:title', property: 'og:title', content: 'http://clinalamo.pt/estetica/' + this.specialities_canonical_url+'/' },
+       { hid: 'og:description', property: 'og:description', content: 'Estética ' + this.specialities_details.name + '. Médicos: ' + this.doctors_name + '. Venha visitar nos em Évora, faça a sua marcação através do 266 745 990 ou 926 649 111 ou online.' },
+       { hid: 'og:site_name', property: 'og:site_name', content: 'www.clinalamo.pt/especialidades/'+ this.specialities_canonical_url+'/' },
+       { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/estetica/' + this.specialities_canonical_url+'/'}
+     ],
+     link: [
+       { rel: 'canonical', href: 'http://clinalamo.pt/estetica/' + this.specialities_canonical_url+'/' }
      ]
    }
  },
@@ -138,6 +154,20 @@ export default {
 
    jQuery("#main-slider").css("height", newHeight + "px");
    jQuery("#single-page-slider").css("min-height", windowsHeight / 3 + "px")
+
+   $("#main-slider .carousel-content").flexVerticalCenter({
+     cssAttribute: "padding-top",
+     verticalOffset: '160px'
+   });
+
+   if (
+     $(document).height() - $(window).height() - $(window).scrollTop() <
+     1000
+   ) {
+     $("#footer-wrapper").css("z-index", "4");
+   } else {
+     $("#footer-wrapper").css("z-index", "1");
+   }
  },
  methods: {
    fetchDescription(id, i) {
