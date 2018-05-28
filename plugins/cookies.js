@@ -14,7 +14,7 @@ window.cookieconsent.initialise({
   "position": "bottom-right",
   "content": {
     "message": "Este site utiliza cookies para assegurar uma experiência de utilização adequada. Ao navegar neste site está a consentir a utilização de cookies.",
-    "dismiss": "Entendi!",
+    "dismiss": "Entendi",
     "link": "Consultar Política de Cookies",
     "href": "http://clinalamo.pt/politica-de-privacidade/"
   }

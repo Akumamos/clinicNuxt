@@ -15,8 +15,8 @@
                   <ul class="nav navbar-nav navbar-right" itemtype="http://www.schema.org/SiteNavigationElement">
                       <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/">Início</nuxt-link></li>
                       <li v-on:click="closeMenu" itemprop="name"><a itemprop="url" href="#" data-toggle="modal" data-target="#myModalHorizontal">Marcações Online</a></li>
-                      <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/exames/">Exames</nuxt-link></li>
                       <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/especialidades/">Especialidades</nuxt-link></li>
+                      <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/exames/">Exames</nuxt-link></li>
                       <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/analises-clinicas/">Análises Clínicas</nuxt-link></li>
                       <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/estetica/">Estética</nuxt-link></li>
                       <li v-on:click="closeMenu"><nuxt-link class="nav-item" to="/contactos/">Contactos</nuxt-link></li>

@@ -195,7 +195,10 @@ export default {
   },
   head () {
     return {
-    title: 'Clinálamo - Clínica Médica Dos Álamos Lda'
+    title: 'Clinálamo - Clínica Médica Dos Álamos Lda',
+    link: [
+      { rel: 'canonical', href: 'http://clinalamo.pt/' }
+    ],
    }
  },
  mounted() {

@@ -30,7 +30,7 @@
 
             <h2>Recolha e Tratamento de Dados</h2>
             <p>Todas as informações pessoais relativas a membros, assinantes, clientes ou visitantes que usem este site serão tratadas em
-              concordância com a Lei da Proteção de Dados Pessoais de 26 de Maio de 2018.</p>
+              concordância com a Lei da Proteção de Dados Pessoais de 25 de Maio de 2018.</p>
             <p>Os dados pessoais recolhidos podem incluir o seu nome, e-mail, número de telefone e/ou telemóvel.
               Este dados, serão tratados e armazenados informaticamente pela Clinálamo - Clínica Médica Dos Álamos Lda. ou pelas entidades por este subcontratadas e
               destinam-se a dar resposta aos seus pedidos de marcação de consultas</p>
@@ -38,7 +38,7 @@
             <div class="gap"></div>
 
             <h2>Direitos do Utilizador</h2>
-            <p>Nos termos previstos na lei, é garantido ao Utilizador, a todo o tempo, o direito de acesso,
+            <p>Nos termos previstos na lei, é garantido ao utilizador, a todo o tempo, o direito de acesso,
               atualização e retificação dos seus dados pessoais, bem como o direito de eliminação ou limitação do seu tratamento,
               a portabilidade dos seus dados e opor-se ao tratamento dos mesmos, verificadas as condições legalmente previstas. </p>
             <p>Poderá exercer estes direitos mediante pedido escrito dirigido a Clinálamo - Clínica Médica Dos Álamos Lda., para Rua António José Couvinha, Lote 16 - R/C Esq.º Urbanização dos Álamos
@@ -61,8 +61,8 @@
 
             <h2>Os Cookies e Web Beacons</h2>
             <p>Utilizamos cookies para armazenar informação, tais como as suas preferências pessoas quando visita o nosso website.
-              Isto poderá incluir um simples popup, ou uma ligação em vários serviços que providenciamos, tais como fóruns.</p>
-            <p>Você detém o poder de desligar os seus cookies, nas opções do seu browser.Se a configuração de privacidade do seu browser estiver definida como “Alta”,
+              Isto poderá incluir um simples popup, ou uma ligação em vários serviços que providenciamos.</p>
+            <p>Você detém o poder de desligar os seus cookies, nas opções do seu browser. Se a configuração de privacidade do seu browser estiver definida como “Alta”,
               não conseguirá aceder a algumas das funcionalidades e poderá ser impedido de utilizar em pleno todas as funcionalidades dos nossos websites ou aplicações.
                Para solucionar esta questão, adicione o nosso endereço de Internet à lista de websites permitidos nas configurações de privacidade do seu browser.</p>
                <div class="gap"></div>

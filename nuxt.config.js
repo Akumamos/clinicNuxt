@@ -25,8 +25,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' },
       { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' },
-      { rel: 'stylesheet', href: '//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css' },
-      { rel: 'canonical', href: 'http://clinalamo.pt/' }
+      { rel: 'stylesheet', href: '//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css' }
     ],
     script: [
      { src: 'https://unpkg.com/sweetalert/dist/sweetalert.min.js' },

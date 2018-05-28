@@ -686,7 +686,7 @@ export default {
                observations: apointment.observations
              };
 
-             //$.post("/sendemail.php", postForm).done(function(data) {});
+             $.post("/sendemail.php", postForm).done(function(data) {});
 
              $("#myModalHorizontal").modal("hide");
 
