@@ -114,7 +114,7 @@ export default {
        { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/exames/' + this.exames_canonical_url+'/'}
      ],
      link: [
-       { rel: 'canonical', href: 'http://clinalamo.pt/exames/' + this.exames_canonical_url+'/' }
+       { rel: 'canonical', href: 'http://clinalamo.pt/estetica/' + this.exames_canonical_url+'/' }
      ]
    }
  },

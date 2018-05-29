@@ -136,7 +136,8 @@ export default {
        { hid: 'og:title', property: 'og:title', content: 'http://clinalamo.pt/especialidades/' + this.specialities_canonical_url+'/' },
        { hid: 'og:description', property: 'og:description', content: 'Especialidade ' + this.specialities_details.name + '. Médicos: ' + this.doctors_name + '. Venha visitar nos em Évora, faça a sua marcação através do 266 745 990 ou 926 649 111 ou online.' },
        { hid: 'og:site_name', property: 'og:site_name', content: 'www.clinalamo.pt/especialidades/'+ this.specialities_canonical_url+'/' },
-       { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/especialidades/' + this.specialities_canonical_url+'/'}
+       { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/especialidades/' + this.specialities_canonical_url+'/'},
+       { hid: 'og:image', property: 'og:image', content: this.specialities_details.media[0].url }
      ],
      link: [
        { rel: 'canonical', href: 'http://clinalamo.pt/especialidades/' + this.specialities_canonical_url+'/' }

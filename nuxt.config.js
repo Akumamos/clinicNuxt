@@ -16,7 +16,7 @@ module.exports = {
       { hid: 'robots', name: 'robots', content: 'index, follow'},
       { hid: 'og:title', property: 'og:title', content: 'http://clinalamo.pt/' },
       { hid: 'og:description', property: 'og:description', content: 'Clinálamo - Clínica Médica Dos Álamos Lda. Venha visitar nos ou faça uma marcação online' },
-      { hid: 'og:image', property: 'og:image', content: 'http://clinalamo.pt/logo-comp.png' },
+      { hid: 'og:image', property: 'og:image', content: 'http://clinalamo.pt/clinic.png' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'www.clinalamo.pt' },
       { hid: 'og:canonical_url', property: 'og:canonical_url', content:'http://clinalamo.pt/'},
       { hid: 'google-site-verification', property: 'google-site-verification', content:'GvncAW5mhdo0cu6QQHlI0e0Im_eplT9z74ACCjVXAyI'}
